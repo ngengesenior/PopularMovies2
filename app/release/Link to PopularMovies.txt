@@ -1,0 +1,1 @@
+/home/ramos/AndroidStudioProjects/PopularMovies/app/release/PopularMovies.txt
