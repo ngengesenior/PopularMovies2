@@ -443,10 +443,6 @@ private int sort = 0;
     @Override
     protected void onDestroy() {
 
-
-        /**
-         * Stop observing when activity gets destroyed
-         */
         super.onDestroy();
         if (movieViewModel.getAllMovies().hasObservers())
         {
