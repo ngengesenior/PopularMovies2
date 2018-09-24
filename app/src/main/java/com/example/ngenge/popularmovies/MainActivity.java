@@ -75,7 +75,6 @@ private String url;
 private String URL_KEY = "urlKey";
 private String sortOrderKey = "SORT_KEY";
 private MovieViewModel movieViewModel;
-private RecyclerView.LayoutManager layoutManager;
 private Observer<List<Movie>> favouriteMoviesObserver;
 private int sort = 0;
 
@@ -84,11 +83,11 @@ private int sort = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("Oncreate","Oncreate called");
         setContentView(R.layout.activity_main);
-        layoutManager = new GridLayoutManager(this,2);
         movieList = findViewById(R.id.movieList);
         movieList.setHasFixedSize(true);
-        movieList.setLayoutManager(layoutManager);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
         setSupportActionBar(toolbar);
@@ -283,7 +282,9 @@ private int sort = 0;
 
         outState.putString(URL_KEY,url);
         outState.putInt(sortOrderKey,sort);
-        listState = layoutManager.onSaveInstanceState();
+//        listState = layoutManager.onSaveInstanceState();
+        listState = movieList.getLayoutManager().onSaveInstanceState();
+
         outState.putParcelable(LIST_STATE_KEY, listState);
 
         super.onSaveInstanceState(outState);
@@ -302,24 +303,24 @@ private int sort = 0;
 
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
-           if(movieList != null)
-           {
-               movieList.addItemDecoration(landscapeDecoration);
-           }
-        }
-
-        else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-        {
-            if(movieList!=null) {
-                movieList.addItemDecoration(portratDecoration);
-            }
-        }
-    }
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+//        {
+//           if(movieList != null)
+//           {
+//               movieList.addItemDecoration(landscapeDecoration);
+//           }
+//        }
+//
+//        else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+//        {
+//            if(movieList!=null) {
+//                movieList.addItemDecoration(portratDecoration);
+//            }
+//        }
+//    }
 
 
 
@@ -335,11 +336,11 @@ private int sort = 0;
 
     @Override
     protected void onResume() {
-        super.onResume();
 
-        if (listState != null) {
-            layoutManager.onRestoreInstanceState(listState);
-        }
+        super.onResume();
+        Log.d("onResume","onResume called");
+
+
         if(!isNetworkConnected())
         {
 
@@ -439,6 +440,27 @@ private int sort = 0;
     }
 
 
+    @Override
+    protected void onDestroy() {
+
+
+        /**
+         * Stop observing when activity gets destroyed
+         */
+        super.onDestroy();
+        if (movieViewModel.getAllMovies().hasObservers())
+        {
+            movieViewModel.getAllMovies().removeObserver(favouriteMoviesObserver);
+        }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Onpause","Onpause called");
+
+    }
 
 
 

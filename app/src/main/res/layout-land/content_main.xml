@@ -11,6 +11,8 @@
    <android.support.v7.widget.RecyclerView
        android:layout_width="match_parent"
        android:id="@+id/movieList"
+       app:spanCount="3"
+       app:layoutManager="android.support.v7.widget.GridLayoutManager"
        android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>
