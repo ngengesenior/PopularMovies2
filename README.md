@@ -29,6 +29,10 @@ The various screenshots are shown below.
 
 ![Trailler](https://github.com/ngengesenior/PopularMovies2/blob/master/detailview.png)
 
+## Demo video
+
+!Demo video](https://github.com/ngengesenior/PopularMovies2/blob/master/popularmovies.mp4)
+
 
 ## Big thanks
 Tho Android guides(https://github.com/codepath/android_guides/wiki/Handling-Configuration-Changes) for making me understand handling Recyclerview state changes 
