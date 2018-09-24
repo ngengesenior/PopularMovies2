@@ -35,7 +35,7 @@ The various screenshots are shown below.
 
 
 ## Big thanks
-Tho Android guides(https://github.com/codepath/android_guides/wiki/Handling-Configuration-Changes) for making me understand handling Recyclerview state changes 
+The Android guides(https://github.com/codepath/android_guides/wiki/Handling-Configuration-Changes) for making me understand handling Recyclerview state changes 
 
 
 
